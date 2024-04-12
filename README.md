@@ -79,3 +79,44 @@ https://www.docker.com/
 https://hub.docker.com/
 [molinav/pyenv]:
 https://hub.docker.com/r/molinav/pyenv
+
+## Build and run image
+
+```shell
+ljohnson@Lees-MBP:[docker-pyenv](master)$ 
+ljohnson@Lees-MBP:[docker-pyenv](master)$ docker build --tag ubuntu-pyenv-3.11.7 . --build-arg BASE_IMAGE=ubuntu:22.04 --build-arg PYTHON_VERSION=3.11.7
+[+] Building 357.0s (20/20) FINISHED                                                                                                                                                                                   docker:desktop-linux
+ => [internal] load build definition from Dockerfile                                                                                                                                                                                   0.0s
+ => => transferring dockerfile: 3.06kB                                                                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:22.04                                                                                                                                                                        0.9s
+ => [auth] sharing credentials for media.johnson.int:5000                                                                                                                                                                              0.0s
+ => [internal] load .dockerignore                                                                                                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                                                                                                        0.0s
+ => [host  1/13] FROM docker.io/library/ubuntu:22.04@sha256:77906da86b60585ce12215807090eb327e7386c8fafb5402369e421f44eff17e                                                                                                           0.0s
+ => [internal] load build context                                                                                                                                                                                                      0.0s
+ => => transferring context: 4.33kB                                                                                                                                                                                                    0.0s
+ => CACHED [host  2/13] RUN ln -snf /usr/share/zoneinfo/UTC /etc/localtime && echo UTC > /etc/timezone                                                                                                                                 0.0s
+ => [host  3/13] COPY scripts /home/scripts                                                                                                                                                                                            0.0s
+ => [host  4/13] RUN sh /home/scripts/manager install openssl ca-certificates wget                                                                                                                                                    14.3s
+ => [host  5/13] RUN sh /home/scripts/manager install git tar gzip patch                                                                                                                                                              20.5s 
+ => [host  6/13] RUN sh /home/scripts/manager install pkg-config make gcc-full                                                                                                                                                        21.0s 
+ => [host  7/13] RUN sh /home/scripts/manager install pyenv-dev                                                                                                                                                                       18.9s 
+ => [host  8/13] RUN sh /home/scripts/manager install python-3.11.7                                                                                                                                                                  259.5s 
+ => [host  9/13] RUN sh /home/scripts/manager remove pyenv-dev                                                                                                                                                                         2.8s 
+ => [host 10/13] RUN sh /home/scripts/manager install python-pip python-wheel python-setuptools                                                                                                                                        8.3s 
+ => [host 11/13] RUN pyenv_root=$(home/scripts/manager info pyenv-root)                      &&    find ${pyenv_root} -type f -name "*.pyc" | xargs rm -f                  &&    find ${pyenv_root} -type f -name "*.pyo" | xargs rm   0.6s 
+ => [host 12/13] RUN rm -rf /home/scripts                                                                                                                                                                                              0.4s 
+ => [host 13/13] RUN echo "Done!"                                                                                                                                                                                                      0.3s 
+ => [stage-1 1/1] COPY --from=host / /                                                                                                                                                                                                 2.9s 
+ => exporting to image                                                                                                                                                                                                                 3.3s 
+ => => exporting layers                                                                                                                                                                                                                3.3s 
+ => => writing image sha256:94a1ec745f278c0221e21ad7f47d02d5cc8cc7354a5d2de9bef4fb4973723fa0                                                                                                                                           0.0s
+ => => naming to docker.io/library/ubuntu-pyenv-3.11.7                                                                                                                                                                                 0.0s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/15l067xckbz19f9m5n2ixjj7x
+ljohnson@Lees-MBP:[docker-pyenv](master)$ 
+
+$ docker run --name py311-live --rm -it ubuntu-pyenv-3.11.7
+
+```
+

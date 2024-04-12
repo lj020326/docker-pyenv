@@ -51,16 +51,16 @@ ARG PYTHON_VERSION
 RUN sh /home/scripts/manager install python-${PYTHON_VERSION}
 RUN sh /home/scripts/manager remove pyenv-dev
 
-# Install end-user available build dependencies.
-RUN sh /home/scripts/manager install blas lapack
-RUN sh /home/scripts/manager install hdf4 hdf5 netcdf4
-RUN sh /home/scripts/manager install matplotlib-dev
+## Install end-user available build dependencies.
+#RUN sh /home/scripts/manager install blas lapack
+#RUN sh /home/scripts/manager install hdf4 hdf5 netcdf4
+#RUN sh /home/scripts/manager install matplotlib-dev
 
 # Upgrade pip, wheel and setuptools if possible.
 RUN sh /home/scripts/manager install python-pip python-wheel python-setuptools
 
-# Install basic scientific tools that may need compilation.
-RUN sh /home/scripts/manager install python-cython python-numpy python-scipy
+## Install basic scientific tools that may need compilation.
+#RUN sh /home/scripts/manager install python-cython python-numpy python-scipy
 
 # Remove cached Python files.
 RUN pyenv_root=$(home/scripts/manager info pyenv-root)                      &&\
