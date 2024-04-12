@@ -114,6 +114,8 @@ ljohnson@Lees-MBP:[docker-pyenv](master)$ docker build --tag ubuntu-pyenv-3.11.7
  => => naming to docker.io/library/ubuntu-pyenv-3.11.7                                                                                                                                                                                 0.0s
 
 View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/15l067xckbz19f9m5n2ixjj7x
+ljohnson@Lees-MBP:[docker-pyenv](master)$ 
+ljohnson@Lees-MBP:[docker-pyenv](master)$ 
 ljohnson@Lees-MBP:[docker-pyenv](master)$ docker run --name py311-live --rm -it ubuntu-pyenv-3.11.7
 root@e94810923e71:/# 
 root@e94810923e71:/# which python
